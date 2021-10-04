@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+            }
+
+            .container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            .card {
+                width: 20vw;
+                height: 20vw;
+            }
+            
+            .flip {
+                backface-visibility: hidden;
+                border: 1px solid black;
+                height: 20vw;
+                width: 20vw;
+                position: absolute;
+                transform-origin: 50% 50% 0px;
+                transition: all 1s;
+            }
+
+            .front {
+                transform: rotateX(0deg) !important;
+            }
+
+            .back {
+                transform: rotateX(180deg) !important;
+            }
+
+            #c1 {
+                transform: rotateX( 0deg );
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #c1text {
+                font-size: 5vw;
+            }
+
+            #c2 {
+                transform: rotateX( 180deg );
+            }
+        </style>
+        <script src="FlippyShit.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="card" onclick="handleRotate()">
+                <img src="./chords/A.png" id="c2" class="flip back"></img>
+                <div id="c1" class="flip front"><span id="c1text">A</span></div>
+            </div>
+        </div>
+        <script>
+            (function() {
+                switchKey();
+            })
+        </script>
+    </body>
+</html>
