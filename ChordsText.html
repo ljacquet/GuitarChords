@@ -11,18 +11,23 @@
                 justify-content: center;
                 width: 100vw;
                 height: 100vh;
+                flex-direction: column;
             }
 
             .card {
-                width: 20vw;
-                height: 20vw;
+                width: 50vw;
+                height: 50vw;
+                max-width: 50vh;
+                max-height: 50vh;
             }
             
             .flip {
                 backface-visibility: hidden;
                 border: 1px solid black;
-                height: 20vw;
-                width: 20vw;
+                height: 50vw;
+                width: 50vw;
+                max-width: 50vh;
+                max-height: 50vh;
                 position: absolute;
                 transform-origin: 50% 50% 0px;
                 transition: all 1s;
@@ -51,19 +56,18 @@
                 transform: rotateX( 180deg );
             }
         </style>
-        <script src="FlippyShit.js"></script>
+        <script src="flip.js"></script>
     </head>
     <body>
         <div class="container">
             <div class="card" onclick="handleRotate()">
-                <img src="./chords/A.png" id="c2" class="flip back"></img>
-                <div id="c1" class="flip front"><span id="c1text">A</span></div>
+                <img id="c2" class="flip back"></img>
+                <div id="c1" class="flip front"><span id="c1text">Loading</span></div>
+            </div>
+            <div>
+                <h3>Autoplay (s): </h3>
+                <input id="autoplay" type="number" oninput="autoPlayUpdate(this.value)" />
             </div>
         </div>
-        <script>
-            (function() {
-                switchKey();
-            })
-        </script>
     </body>
 </html>

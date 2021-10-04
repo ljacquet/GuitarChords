@@ -1,5 +1,6 @@
 flipped = false;
 currentIndex = -1;
+delay = -1;
 
 chords = [
   "A",
@@ -70,6 +71,7 @@ document.onkeydown = (e) => {
       break;
     case "ArrowRight":
     case "ArrowLeft":
+      autoPlayUpdate(delay);
       switchKey();
       break;
   }
@@ -95,3 +97,36 @@ function switchKey() {
       "./chords/" + chords[currentIndex] + ".png";
   }
 }
+
+currentTimeout = null;
+function autoPlayUpdate(e) {
+  // Clear old timeout
+  if (currentTimeout != null) {
+    console.log("Cleared timeout");
+    clearTimeout(currentTimeout);
+  }
+
+  if (e == "" || parseFloat(e) <= 0) {
+    delay = -1;
+  } else {
+    delay = e;
+    // Create timeout
+    console.log("delaying: " + delay);
+    currentTimeout = setTimeout(switchKeyHandler, (delay * 1000) / 2);
+  }
+  console.log(e);
+}
+
+function switchKeyHandler() {
+  console.log("delaying: " + delay / 2);
+  if (!flipped) {
+    handleRotate();
+  } else {
+    switchKey();
+  }
+  currentTimeout = setTimeout(switchKeyHandler, (delay * 1000) / 2);
+}
+
+window.onload = function () {
+  switchKey();
+};
