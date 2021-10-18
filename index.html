@@ -60,13 +60,15 @@
     </head>
     <body>
         <div class="container">
-            <div class="card" onclick="handleRotate()">
+            <div class="card" onclick="handleRotate()" ondblclick="switchKey()">
                 <img id="c2" class="flip back"></img>
                 <div id="c1" class="flip front"><span id="c1text">Loading</span></div>
             </div>
-            <div>
+            <>
                 <h3>Autoplay (s): </h3>
                 <input id="autoplay" type="number" oninput="autoPlayUpdate(this.value)" />
+                <br>
+                <a href="https://github.com/ljacquet/GuitarChords">HELP</a>
             </div>
         </div>
     </body>
