@@ -20,5 +20,9 @@ I'm most likely not going to be making any updates to this unless something comp
 ### Autoflip
 if there is a number entered in the autoflip field the chords will automatically change every x seconds and flip every x / 2.
 
+## Choosing Cards
+Click / Tap the toggles at the top of the page to choose what cards you are learning
+
 # Changing Cards
-If you ever want to use this as a baseline for another set of flash cards you can replace the strings in the flip.js chords array to whatever you want. It will search in the chords/ folder for the name.png.
+If you ever want to use this as a baseline for another set of flash cards you can replace the strings in the flip.js activeCards array to whatever you want. You can either update the updateSelections function or set the array to an object with the following properties.
+{ name: name within directory / name on card, type: directory to search in, typeName: name to show over card }
