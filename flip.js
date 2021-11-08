@@ -166,7 +166,7 @@ function switchKey() {
       "./" +
       activeCards[currentIndex].type +
       "/" +
-      activeCards[currentIndex].name +
+      activeCards[currentIndex].name.toLowerCase() +
       ".png";
   }
 }
