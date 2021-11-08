@@ -28,6 +28,24 @@ chords = [
   "G7",
 ];
 
+bar = [
+  "A7",
+  "Amajor",
+  "Amajor7",
+  "Aminor",
+  "Aminor7",
+  "E7",
+  "Emajor",
+  "Emajor7",
+  "Eminor",
+  "Eminor7",
+];
+
+blues = ["A", "D", "E", "G"];
+
+activeCards = [];
+updateSelections(true);
+
 function shuffle(array) {
   let currentIndex = array.length,
     randomIndex;
@@ -49,7 +67,7 @@ function shuffle(array) {
 }
 
 // Initial Shuffle
-shuffle(chords);
+shuffle(activeCards);
 
 function handleRotate() {
   if (flipped) {
@@ -61,6 +79,50 @@ function handleRotate() {
   }
 
   flipped = !flipped;
+}
+
+function updateSelections(selection) {
+  currentIndex = 0;
+  activeCards = [];
+
+  if (selection) {
+    for (let i = 0; i < chords.length; i++) {
+      const element = chords[i];
+      activeCards.push({ name: element, type: "chords", typeName: "Chord" });
+    }
+  } else {
+    if (document.getElementById("base").checked) {
+      for (let i = 0; i < chords.length; i++) {
+        const element = chords[i];
+        activeCards.push({ name: element, type: "chords", typeName: "Chord" });
+      }
+    }
+
+    if (document.getElementById("bar").checked) {
+      for (let i = 0; i < bar.length; i++) {
+        const element = bar[i];
+        activeCards.push({
+          name: element,
+          type: "bar",
+          typeName: "Bar Chord",
+          root: element[0],
+        });
+      }
+    }
+
+    if (document.getElementById("jazz").checked) {
+      for (let i = 0; i < blues.length; i++) {
+        const element = blues[i];
+        activeCards.push({
+          name: element,
+          type: "blues",
+          typeName: "Blues Progression",
+        });
+      }
+    }
+
+    shuffle(activeCards);
+  }
 }
 
 document.onkeydown = (e) => {
@@ -79,22 +141,33 @@ document.onkeydown = (e) => {
 
 function switchKey() {
   currentIndex++;
-  if (currentIndex >= chords.length) {
+  if (currentIndex >= activeCards.length) {
     currentIndex = 0;
-    shuffle(chords);
+    shuffle(activeCards);
   }
 
-  document.getElementById("c1text").innerHTML = chords[currentIndex];
+  document.getElementById("c1text").innerHTML =
+    activeCards[currentIndex].typeName +
+    "<br/>" +
+    activeCards[currentIndex].name;
 
   if (flipped) {
     handleRotate();
     setTimeout(() => {
-      document.getElementById("c2").src =
-        "./chords/" + chords[currentIndex] + ".png";
-    }, 1000);
+      document.getElementById("c2image").src =
+        "./" +
+        activeCards[currentIndex].type +
+        "/" +
+        activeCards[currentIndex].name.toLowerCase() +
+        ".png";
+    }, 250);
   } else {
-    document.getElementById("c2").src =
-      "./chords/" + chords[currentIndex] + ".png";
+    document.getElementById("c2image").src =
+      "./" +
+      activeCards[currentIndex].type +
+      "/" +
+      activeCards[currentIndex].name +
+      ".png";
   }
 }
 
